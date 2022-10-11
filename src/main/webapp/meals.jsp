@@ -24,8 +24,8 @@
                 <td>${meal.dateTime.format(DateTimeFormatter.ofPattern("yyyy-dd-MM HH:mm"))}</td>
                 <td>${meal.description}</td>
                 <td>${meal.calories}</td>
-                <td><a href="">Update</a></td>
-                <td><a href="">Delete</a></td>
+                <td><a href="MealController?action=edit&id=<c:out value="${meal.id}"/>">Update</a></td>
+                <td><a href="MealController?action=delete&id=<c:out value="${meal.id}"/>">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

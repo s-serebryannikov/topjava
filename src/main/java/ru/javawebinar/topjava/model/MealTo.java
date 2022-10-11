@@ -11,8 +11,6 @@ public class MealTo {
 
     private final int calories;
 
-    static AtomicInteger nextId = new AtomicInteger();
-
     private final Integer id;
 
     private final boolean excess;
