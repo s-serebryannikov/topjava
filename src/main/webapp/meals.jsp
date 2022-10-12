@@ -21,7 +21,7 @@
         <c:forEach items="${meals}" var="meal">
             <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.MealTo"/>
             <tr style="color:${meal.excess ? 'red' : 'green'}">
-                <td>${meal.dateTime.format(DateTimeFormatter.ofPattern("yyyy-dd-MM HH:mm"))}</td>
+                <td>${meal.dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))}</td>
                 <td>${meal.description}</td>
                 <td>${meal.calories}</td>
                 <td><a href="meals?action=update&id=${meal.id}">Edit</a></td>
@@ -29,6 +29,8 @@
             </tr>
         </c:forEach>
     </table>
+    <br>
+    <button><a href="meals?action=create&id=${meal.id}">Add meal</a></button>
 </section>
 </body>
 </html>

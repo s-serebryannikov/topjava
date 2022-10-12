@@ -5,7 +5,7 @@ import java.util.Collection;
 
 public interface MealStorage {
 
-    Meal add(Meal meal);
+    Meal createOrUpdate(Meal meal);
 
     void delete(int id);
 
