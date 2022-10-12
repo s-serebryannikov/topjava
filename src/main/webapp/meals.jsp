@@ -6,7 +6,7 @@
     <title>Meals</title>
 </head>
 <body>
-<h2><a href="">Home</a></h2>
+<h2><a href="index.html">Home</a></h2>
 <p></p>
 <h1>Meals</h1>
 <section>
@@ -18,14 +18,14 @@
             <th></th>
             <th></th>
         </tr>
-        <c:forEach items="${mealsList}" var="meal">
+        <c:forEach items="${meals}" var="meal">
             <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.MealTo"/>
             <tr style="color:${meal.excess ? 'red' : 'green'}">
                 <td>${meal.dateTime.format(DateTimeFormatter.ofPattern("yyyy-dd-MM HH:mm"))}</td>
                 <td>${meal.description}</td>
                 <td>${meal.calories}</td>
-                <td><a href="MealController?action=edit&id=<c:out value="${meal.id}"/>">Update</a></td>
-                <td><a href="MealController?action=delete&id=<c:out value="${meal.id}"/>">Delete</a></td>
+                <td><a href="meals?action=update&id=${meal.id}">Edit</a></td>
+                <td><a href="meals?action=delete&id=${meal.id}">Delete</a></td>
             </tr>
         </c:forEach>
     </table>
