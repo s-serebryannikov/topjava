@@ -45,7 +45,7 @@
             <th></th>
         </tr>
         </thead>
-        <c:forEach items="${requestScope.meals}" var="meal">
+        <c:forEach items="${meals}" var="meal">
             <jsp:useBean id="meal" type="ru.javawebinar.topjava.to.MealTo"/>
             <tr data-meal-excess="${meal.excess}">
                 <td>
