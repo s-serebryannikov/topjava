@@ -35,8 +35,7 @@ public class MatcherFactory {
                 (a, e) -> assertThat(a).usingRecursiveFieldByFieldElementComparatorIgnoringFields(fieldsToIgnore).isEqualTo(e));
     }
 
-    public static class
-    Matcher<T> {
+    public static class Matcher<T> {
         private final Class<T> clazz;
         private final BiConsumer<T, T> assertion;
         private final BiConsumer<Iterable<T>, Iterable<T>> iterableAssertion;
