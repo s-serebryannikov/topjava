@@ -8,6 +8,21 @@ let ctx = {
     }
 }
 
+function enable(chkbox, id) {
+    var enabled = chkbox.is(":checked");
+//  https://stackoverflow.com/a/22213543/548473
+    $.ajax({
+        url: userAjaxUrl + id,
+        type: "POST",
+        data: "enabled=" + enabled
+    }).done(function () {
+        chkbox.closest("tr").attr("data-user-enabled", enabled);
+        successNoty(enabled ? "Enabled" : "Disabled");
+    }).fail(function () {
+        $(chkbox).prop("checked", !enabled);
+    });
+}
+
 // $(document).ready(function () {
 $(function () {
     // https://stackoverflow.com/a/5064235/548473
