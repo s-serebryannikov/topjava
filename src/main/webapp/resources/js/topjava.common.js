@@ -1,14 +1,7 @@
-let form;
+var form;
 
-function makeEditable(datatableApi) {
-    ctx.datatableApi = datatableApi;
+function makeEditable() {
     form = $('#detailsForm');
-    $(".delete").click(function () {
-        if (confirm('Are you sure?')) {
-            deleteRow($(this).closest('tr').attr("id"));
-        }
-    });
-
     $(document).ajaxError(function (event, jqXHR, options, jsExc) {
         failNoty(jqXHR);
     });
@@ -23,34 +16,36 @@ function add() {
 }
 
 function deleteRow(id) {
-    $.ajax({
-        url: ctx.ajaxUrl + id,
-        type: "DELETE"
-    }).done(function () {
-        updateTable();
-        successNoty("Deleted");
-    });
+    if (confirm('Are you sure?')) {
+        $.ajax({
+            url: ctx.ajaxUrl + id,
+            type: "DELETE"
+        }).done(function () {
+            ctx.updateTable();
+            successNoty("Deleted");
+        });
+    }
 }
 
-function updateTable() {
-    $.get(ctx.ajaxUrl, function (data) {
-        ctx.datatableApi.clear().rows.add(data).draw();
-    });
+function updateTableByData(data) {
+    ctx.datatableApi.clear().rows.add(data).draw();
 }
 
 function save() {
+    $("#editRow").modal({
+    });
     $.ajax({
         type: "POST",
         url: ctx.ajaxUrl,
         data: form.serialize()
     }).done(function () {
         $("#editRow").modal("hide");
-        updateTable();
+        ctx.updateTable();
         successNoty("Saved");
     });
 }
 
-let failedNote;
+var failedNote;
 
 function closeNoty() {
     if (failedNote) {
@@ -75,6 +70,5 @@ function failNoty(jqXHR) {
         text: "<span class='fa fa-lg fa-exclamation-circle'></span> &nbsp;Error status: " + jqXHR.status,
         type: "error",
         layout: "bottomRight"
-    });
-    failedNote.show()
+    }).show();
 }

@@ -1,14 +1,19 @@
-const userAjaxUrl = "admin/users/";
+var ctx,userAjaxUrl = "admin/users/";
 
 // https://stackoverflow.com/a/5064235/548473
-const ctx = {
-    ajaxUrl: userAjaxUrl
-};
+let ctx = {
+    ajaxUrl: userAjaxUrl,
+    updateTable: function () {
+        $.get(userAjaxUrl, updateTableByData);
+    }
+}
 
 // $(document).ready(function () {
 $(function () {
-    makeEditable(
-        $("#datatable").DataTable({
+    // https://stackoverflow.com/a/5064235/548473
+    ctx = {
+        ajaxUrl: userAjaxUrl,
+        datatableApi: $("#datatable").DataTable({
             "paging": false,
             "info": true,
             "columns": [
@@ -42,6 +47,10 @@ $(function () {
                     "asc"
                 ]
             ]
-        })
-    );
+        }),
+        updateTable: function () {
+            $.get(userAjaxUrl, updateTableByData);
+        }
+    };
+    makeEditable();
 });
