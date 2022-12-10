@@ -1,7 +1,9 @@
-var form;
+let form;
 
-function makeEditable() {
+function makeEditable(datatableApi) {
+    ctx.datatableApi = datatableApi;
     form = $('#detailsForm');
+
     $(document).ajaxError(function (event, jqXHR, options, jsExc) {
         failNoty(jqXHR);
     });
@@ -42,8 +44,6 @@ function updateTableByData(data) {
 }
 
 function save() {
-    $("#editRow").modal({
-    });
     $.ajax({
         type: "POST",
         url: ctx.ajaxUrl,
@@ -55,7 +55,7 @@ function save() {
     });
 }
 
-var failedNote;
+let failedNote;
 
 function closeNoty() {
     if (failedNote) {
@@ -77,8 +77,9 @@ function successNoty(text) {
 function failNoty(jqXHR) {
     closeNoty();
     failedNote = new Noty({
-        text: "<span class='fa fa-lg fa-exclamation-circle'></span> &nbsp;Error status: " + jqXHR.status,
+        text: "<span class='fa fa-lg fa-exclamation-circle'></span> &nbsp;Error status: " + jqXHR.status + (jqXHR.responseJSON ? "<br>" + jqXHR.responseJSON : ""),
         type: "error",
         layout: "bottomRight"
-    }).show();
+    });
+    failedNote.show()
 }

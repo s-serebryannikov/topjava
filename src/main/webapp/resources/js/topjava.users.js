@@ -1,7 +1,7 @@
-var ctx,userAjaxUrl = "admin/users/";
+const userAjaxUrl = "admin/users/";
 
 // https://stackoverflow.com/a/5064235/548473
-let ctx = {
+const ctx = {
     ajaxUrl: userAjaxUrl,
     updateTable: function () {
         $.get(userAjaxUrl, updateTableByData);
@@ -25,10 +25,8 @@ function enable(chkbox, id) {
 
 // $(document).ready(function () {
 $(function () {
-    // https://stackoverflow.com/a/5064235/548473
-    ctx = {
-        ajaxUrl: userAjaxUrl,
-        datatableApi: $("#datatable").DataTable({
+    makeEditable(
+        $("#datatable").DataTable({
             "paging": false,
             "info": true,
             "columns": [
@@ -62,10 +60,6 @@ $(function () {
                     "asc"
                 ]
             ]
-        }),
-        updateTable: function () {
-            $.get(userAjaxUrl, updateTableByData);
-        }
-    };
-    makeEditable();
+        })
+    );
 });
